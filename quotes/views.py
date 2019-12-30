@@ -34,3 +34,4 @@ def add_stock(request):
 # api_request = requests.get(
 #     'https://sandbox.iexapis.com/stable/stock/' + ticker + '/quote?token=Tpk_6d838c95bd884fbc81acf66dc4cb613b')
 
+

@@ -3,6 +3,7 @@
 
 2) ADD PROJECT TO GIT (be where your manage.py is)
     git init
+    git status
 
 
 
@@ -13,3 +14,10 @@ create git repository using cmomand line only (must have curl installed):
     windows command:
         curl -u "mjovbg" https://api.github.com/user/repos -d "{ \"name\: \ts_site\" }"
     remember to replace 'USER' with your username and REPO with repository name!
+
+3) CHECKING AND PUSHING
+    git status --- to check changes
+    git add . --- add all
+    git add
+    git commit -m "commit message comes here"
+    git push
