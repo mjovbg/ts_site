@@ -1,0 +1,15 @@
+1) CHECK GIT VERSION IN CMD LINE
+    git --version
+
+2) ADD PROJECT TO GIT (be where your manage.py is)
+    git init
+
+
+
+
+create git repository using cmomand line only (must have curl installed):
+        curl -u'USER' https://api.github.com/user/repos -d '{"name": "REPO"}'
+    on windows there is no single quotes only double
+    windows command:
+        curl -u "mjovbg" https://api.github.com/user/repos -d "{ \"name\: \ts_site\" }"
+    remember to replace 'USER' with your username and REPO with repository name!
