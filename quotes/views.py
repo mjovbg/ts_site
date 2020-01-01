@@ -1,5 +1,7 @@
-from django.shortcuts import render
-
+from django.shortcuts import render, redirect
+from .models import Stock
+from django.contrib import messages
+from .forms import StockForm
 
 # Create your views here.
 # for every web page you create one view by creating a function
@@ -28,9 +30,20 @@ def about(request):
     return render(request, 'about.html', {})
 
 def add_stock(request):
-    return render(request, 'add_stock.html', {})
+    # if the add stock form is filled it will return success message and add stock to DB
+    if request.method == 'POST':
+        form = StockForm(request.POST or None)
 
-# ticker = request.POST['ticker']
+        if form.is_valid():
+            form.save()
+            messages.success(request, ('Stock added!'))
+            return redirect ('add_stock')
+    else:
+        # if the form is not filled, it will just print stocks that are already in the db
+        ticker = Stock.objects.all()
+        return render(request, 'add_stock.html', {'ticker': ticker})
+
+
 # api_request = requests.get(
 #     'https://sandbox.iexapis.com/stable/stock/' + ticker + '/quote?token=Tpk_6d838c95bd884fbc81acf66dc4cb613b')
 
