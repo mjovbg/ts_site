@@ -43,6 +43,12 @@ def add_stock(request):
         ticker = Stock.objects.all()
         return render(request, 'add_stock.html', {'ticker': ticker})
 
+def delete(request, stock_id):
+    item = Stock.objects.get(pk=stock_id)       # grabbing id from DB
+    item.delete()
+    messages.success('Stock Deleted!')
+    return redirect(add_stock)
+
 
 # api_request = requests.get(
 #     'https://sandbox.iexapis.com/stable/stock/' + ticker + '/quote?token=Tpk_6d838c95bd884fbc81acf66dc4cb613b')

@@ -8,6 +8,7 @@ from django.db import models
 class Stock(models.Model):
     # now define DB - what you want to save:
     ticker = models.CharField(max_length=10)
+    # ids are added by default
 
     def __str__(self):
         return self.ticker
