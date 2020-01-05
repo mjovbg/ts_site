@@ -1,0 +1,25 @@
+While inside venv!
+1) Create new django project
+    django-admin startproject <name>
+    this creates manage.py
+
+2) Create a django app
+    python manage.py startapp <name>
+    this creates app folder with admin, apps, models, tests, views.py also creates migrations folder.
+
+3) add urls
+    in project's utl.py import include --> this will tell django to look in app folder, not project's url
+    create urls.py in app's folder
+    from django.conf.urls import url
+    from . import views --> to import functions you create in views.py
+
+4) settings - register app
+    installed_apps list
+    add the name of your app
+
+
+
+
+
+
+

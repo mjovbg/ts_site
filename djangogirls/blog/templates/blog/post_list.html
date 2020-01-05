@@ -1,0 +1,15 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+    {% for post in posts %}
+        <div class="post">
+            <div class="date">
+                {{ post.published_date }}
+            </div>
+            <h2><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h2>
+             <!--with url 'post_detail you tell django to go in blog/urls.py and find url with name post_detail-->
+            <!--pk=post.pk &ndash;&gt; pk = primary key(automatically created by django) that you can access like title, author...-->
+            <p>{{ post.text|linebreaksbr }}</p>
+        </div>
+    {% endfor %}
+{% endblock %}
