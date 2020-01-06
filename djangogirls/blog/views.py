@@ -30,7 +30,8 @@ def post_new(request):
         if form.is_valid():
             post = form.save(commit=False)      #commit = False ensures that form is not saved before author is added.
             post.author = request.user
-            post.published_date = timezone.now()
+            # post.published_date = timezone.now()
+            # commenting the line above allows saving posts as drafts.
             post.save()
             # following line will ensure that user go to post_detail after publishing. for this use redirect.
             return redirect('post_detail', pk=post.pk)
@@ -46,9 +47,17 @@ def post_edit(request, pk):
         if form.is_valid():
             post = form.save(commit=False)
             post.author = request.user
-            post.published_date = timezone.now()
+            # post.published_date = timezone.now()
             post.save()
             return redirect('post_detail', pk=post.pk)
     else:
         form = PostForm(instance=post)
     return render(request, 'blog/post_edit.html', {'form': form})
+
+def post_draft_list(request):
+    posts = Post.objects.filter(published_date__isnull=True).order_by('created_date')
+    # above line ensures that we take only unpublished posts.
+    return render(request,'blog/post_draft_list.html', {'posts':posts})
+
+
+
