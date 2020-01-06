@@ -10,6 +10,7 @@
              <!--with url 'post_detail you tell django to go in blog/urls.py and find url with name post_detail-->
             <!--pk=post.pk &ndash;&gt; pk = primary key(automatically created by django) that you can access like title, author...-->
             <p>{{ post.text|linebreaksbr }}</p>
+            <a href="{% url 'post_detail' pk=post.pk %}">Comments: {{ post.comments.count }}</a>
         </div>
     {% endfor %}
 {% endblock %}

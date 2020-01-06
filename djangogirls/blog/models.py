@@ -36,3 +36,19 @@ A QuerySet is, in essence, a list of objects of a given Model.
 QuerySets allow you to read the data from the database, filter it and order it.
 '''
 
+class Comment(models.Model):
+    post = models.ForeignKey('blog.Post', on_delete=models.CASCADE, related_name='comments')
+    # related_name allows to acces to comments from within the Post model.
+    author = models.CharField(max_length=200)
+    text = models.TextField()
+    created_date = models.DateTimeField(default=timezone.now())
+    approved_comment = models.BooleanField(default=False)
+
+    def approve(self):
+        self.approved_comment = True
+        self.save()
+
+    def __str__(self):
+        return self.text
+
+

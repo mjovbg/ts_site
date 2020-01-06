@@ -1,9 +1,11 @@
 from django.contrib import admin
-from .models import Post
+from .models import Post, Comment
 
 # To make our model visible on the admin page, we need to register the model with admin.site.register(Post).
 admin.site.register(Post)
 
+# To register Comment model in the admin panel you add:
+admin.site.register(Comment)
 
 
 
