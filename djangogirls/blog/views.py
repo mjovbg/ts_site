@@ -7,7 +7,7 @@ from .forms import PostForm
 
 def post_list(request):
     # get posts from db:
-    posts = Post.objects.filter(published_date__lte = timezone.now()).order_by('published_date')
+    posts = Post.objects.filter(published_date__lte = timezone.now()).order_by('published_date').reverse()
     return render(request, 'blog/post_list.html', {'posts':posts})   # request here refers to all we receive from users via internet.
     # in function above {} is a place where you can add things for the templates to use.
     # after you set all this, you adjust your template so it can present the data that views provide!
@@ -16,7 +16,7 @@ def post_detail(request, pk):
     post = get_object_or_404(Post, pk=pk)
     return render(request, 'blog/post_detail.html', {'post':post})
 
-@login_required
+@login_required         # this is django decorator.
 def post_new(request):
     '''
     To create a new post you need to call PostForm() - initialize it and pass it to template.
@@ -40,6 +40,7 @@ def post_new(request):
         form = PostForm()
         return render(request, 'blog/post_edit.html', {'form': form})
 
+@login_required
 def post_edit(request, pk):
     post = get_object_or_404(Post, pk=pk)
     if request.method == "POST":
@@ -54,16 +55,19 @@ def post_edit(request, pk):
         form = PostForm(instance=post)
     return render(request, 'blog/post_edit.html', {'form': form})
 
+@login_required
 def post_draft_list(request):
     posts = Post.objects.filter(published_date__isnull=True).order_by('created_date')
     # above line ensures that we take only unpublished posts.
     return render(request,'blog/post_draft_list.html', {'posts':posts})
 
+@login_required
 def post_publish(request, pk):
     post = get_object_or_404(Post, pk=pk)
     post.publish()
     return redirect('post_detail', pk=pk)
 
+@login_required
 def post_remove(request, pk):
     post = get_object_or_404(Post, pk = pk)
     post.delete()
